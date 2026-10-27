@@ -38,7 +38,7 @@ Independent developers may use their own provider accounts instead. That is not 
 With backend credentials configured:
 
 1. Send: `Find beginner-friendly online English lessons under USD 20 per lesson.`
-2. Inspect the need summary, options, and original source links. Search results vary; a particular provider is not guaranteed.
+2. Inspect the need summary and options. If payable test options appear, expand **Review web sources and other ways to begin** to inspect the original search links. Search results vary; a particular provider is not guaranteed. Test items remain explicitly fictional and separate from these sources.
 3. Use **Edit needs** or send: `Only weekends, and I prefer a patient teacher.`
 4. Inspect a source. A reference price requires matching source evidence. Unknown prices, availability, or location must stay unconfirmed.
 5. Where next-step choices are offered, select useful items and use **Submit choices**. If a contact message is generated, edit or copy it. It is not automatically sent to anyone.
@@ -47,9 +47,9 @@ Ordinary web results are external leads. Momo does not accept payments for those
 
 ## Test 3 — AI-to-PayPal Sandbox
 
-1. Send: `I want an English speaking partner, at most USD 15, weekends only. Use the demo catalog.`
+1. Send: `I want an English speaking partner, at most USD 15, weekends only.` No special demo phrase is required for the checkout handoff.
 2. The current fictional catalog has one matching item: **Sam, USD 12**, with a weekend test slot. More expensive or weekday-only items must not be valid matches.
-3. Open **Review option**. Check the item, test time, USD amount, and Sandbox label.
+3. Click **Review & pay** on the matching test item. Check the item, test time, USD amount, and Sandbox label. The checkout must retain the permitted test times rather than reintroducing a weekday choice.
 4. Use the official PayPal button, or **Open checkout** if the button SDK is unavailable.
 5. Log in with the separate **Personal Sandbox buyer** and approve the test payment yourself.
 6. Return to the same browser and origin. Inspect **Payment history** for verified **Completed** status, order ID, and capture ID.
