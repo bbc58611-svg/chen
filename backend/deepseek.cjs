@@ -1,6 +1,7 @@
 'use strict';
 const {searchWeb,groundedOffers}=require('./search.cjs');
 const decision=require('./decision.cjs');
+const {checkoutForNeeds}=require('./checkout.cjs');
 const ENGLISH_OUTPUT='The product interface is English. Reply in natural, concise English by default, including needs.goal, needs.schedule, preferences, questions, paths, checklists, draft titles, suggestions, reasons and cautions. Do this even when a user writes in Chinese. Keep identifiers, currency codes and numeric amounts unchanged. Preserve exact source quotations, proper names and public addresses in their original form as evidence; do not invent English names or translated quotes. A message draft may use another language only when the user explicitly requests it. Keep the main reply to one or two short sentences.';
 class ApiError extends Error {
   constructor(status, code, message) { super(message); this.status=status; this.code=code; }
@@ -132,7 +133,13 @@ function createDeepSeek({apiKey,model='deepseek-flash',catalog=[],fetchImpl=fetc
           }
         }
       }else if(query){search={status:'disabled',query,results:[],notice:"Web search is disabled. These are planning suggestions."};}
-      return {provider:'deepseek',model,...result,search,offers:groundedOffers(raw.offers,search,result.needs)};
+      const checkout=checkoutForNeeds(result.needs,catalog);
+      let reply=result.reply;
+      if(checkout.status==='available'){
+        const chosen=catalog.find(item=>item.id===checkout.items[0].id);
+        reply=checkout.items.length===1?`${chosen.name} is the matching sandbox option at USD ${chosen.price.toFixed(2)}. Review the test details before approving payment.`:`There are ${checkout.items.length} payable sandbox options below. Choose one to review the item and total before approving payment.`;
+      }
+      return {provider:'deepseek',model,...result,reply,search,offers:groundedOffers(raw.offers,search,result.needs),checkout};
     } catch(error) {
       if(error instanceof ApiError)throw error;
       if(controller.signal.aborted)fail('AI_TIMEOUT',"The reply timed out or was cancelled. Please try again.",504);
