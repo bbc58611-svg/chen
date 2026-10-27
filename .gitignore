@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+node_modules/
+coverage/
+.packaging-tmp/
+*.log
+.local/
+.private/
+judge-access.private*
+.openai/

@@ -1,0 +1,9 @@
+{
+  "name": "momo-wish-companion",
+  "private": true,
+  "version": "0.2.0",
+  "description": "An animated AI wish companion with source-backed discovery and user-approved PayPal Sandbox checkout.",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": { "start": "node server.cjs", "test": "node --test test/*.test.cjs" }
+}
