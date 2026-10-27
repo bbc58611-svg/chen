@@ -39,14 +39,19 @@
     if(pending)content="<div class=\"ai-wait\" role=\"status\"><span class=\"loader\"></span><div><strong>Momo is putting things together…</strong><p>Keeping your preferences and comparing supported options.</p></div><button data-ai-cancel>Stop</button></div>";
     else if(error)content=`<section class="ai-error" role="alert"><strong>Momo could not finish this reply</strong><p>${e(error)}</p><button class="primary-button" data-ai-retry>Retry this message ↗</button><button class="text-button" data-ai-demo>Try the guided demo</button></section>`;
     else if(result){
-      if(result.question)content+=`<section class="ai-question"><span>One quick question</span><h2>${e(result.question)}</h2></section>`;
-      content+=D.draft(result.draft,draftText)+D.checklist(result.checklist,checkedItems)+D.resources(result);
+      const ready=result.checkout?.status==='available'&&result.checkout.items?.length;
+      let supporting='';
+      if(ready)content+=D.checkout(result.checkout,catalog);
+      if(result.question)supporting+=`<section class="ai-question"><span>One quick question</span><h2>${e(result.question)}</h2></section>`;
+      supporting+=D.draft(result.draft,draftText)+D.checklist(result.checklist,checkedItems)+D.resources(result);
       const alternative=D.paths(result.paths);
       if(alternative){
-        content+=(result.offers?.length||result.draft||result.checklist||result.question)?`<details class="alternative-paths"><summary>Explore other paths and next steps</summary>${alternative}</details>`:"<div class=\"results-head\"><div><h2>Here are a few ways to begin.</h2></div></div>"+alternative;
+        supporting+=(result.offers?.length||result.draft||result.checklist||result.question||ready)?`<details class="alternative-paths"><summary>Explore other paths and next steps</summary>${alternative}</details>`:"<div class=\"results-head\"><div><h2>Here are a few ways to begin.</h2></div></div>"+alternative;
       }
-      if(result.recommendations.length)content+=`<section class="sandbox-recommendations"><div class="results-head"><div><h2>Sandbox options</h2><p>Fictional test catalog · Continue to PayPal Sandbox after choosing</p></div></div><div class="cards">${result.recommendations.map((r,i)=>{const item=catalog.find(x=>x.id===r.id);return window.MOMO_DEMO_UI.card(item,i);}).join('')}</div></section>`;
-      if(!result.checklist)content+=`<div class="ai-suggestions">${result.suggestions.map((s,i)=>`<button class="choice-button" data-ai-suggestion="${i}">${e(s)} ↗</button>`).join('')}</div>`;
+      content+=ready&&supporting?`<details class="checkout-supporting"><summary>Review web sources and other ways to begin</summary>${supporting}</details>`:supporting;
+      if(!ready&&result.recommendations.length)content+=`<section class="sandbox-recommendations"><div class="results-head"><div><h2>Sandbox options</h2><p>Fictional test catalog · Continue to PayPal Sandbox after choosing</p></div></div><div class="cards">${result.recommendations.map((r,i)=>{const item=catalog.find(x=>x.id===r.id);return window.MOMO_DEMO_UI.card(item,i);}).join('')}</div></section>`;
+      if(!ready&&!result.question&&(result.checkout?.category||result.offers?.length||result.draft||result.checklist||result.paths.some(path=>['goods','service'].includes(path.kind))))content+=D.checkout(result.checkout,catalog);
+      if(!ready&&!result.checklist)content+=`<div class="ai-suggestions">${result.suggestions.map((s,i)=>`<button class="choice-button" data-ai-suggestion="${i}">${e(s)} ↗</button>`).join('')}</div>`;
       if(result.search?.status==='succeeded')content+="<p class=\"result-footnote\">Sources may be outdated. Opening a map or source does not place an order. Check current prices, hours and availability with the provider.</p>";
     }
     $('#journey').innerHTML=(result?D.needbar(result.needs,pending?[]:changes,pending):'')+history+content;
@@ -86,7 +91,7 @@
       result=data;draftText=data.draft?.body||'';turns.push({role:'assistant',content:D.context(data),display:data.reply});
       connection='connected';mascot('found',"All set. Which path feels right for you?");
     }catch(err){if(run!==version)return;error=err.name==='AbortError'?"Stopped waiting. You can try again.":err.message;mascot('listen',"Your wish is still right here");}
-    finally{if(run===version){pending=false;controller=null;render();status();}}
+    finally{if(run===version){pending=false;controller=null;render();status();if(!error&&result?.checkout?.status==='available')$('#journey .checkout-decision')?.scrollIntoView({behavior:'smooth',block:'start'});}}
   }
   document.addEventListener('submit',event=>{
     if(mode==='ai'&&event.target.id==='aiNeedsForm'){
@@ -108,8 +113,13 @@
     const handle=fn=>{event.preventDefault();event.stopImmediatePropagation();fn();};
     if(b.id==='aiModeButton'||b.hasAttribute('data-ai-demo'))return handle(switchMode);
     if(b.id==='aiCheckButton')return handle(check);
+    if(b.hasAttribute('data-checkout-demo'))return handle(()=>window.MOMO_DEMO_UI.sandboxCatalog());
     if(b.hasAttribute('data-close-needs'))return handle(()=>$('#aiNeedsEditor').close());
     if(mode!=='ai')return;
+    if(b.hasAttribute('data-checkout-choice')&&result&&!pending)return handle(()=>{
+      const choice=result.checkout?.items?.find(item=>item.id===b.dataset.checkoutChoice);
+      if(choice)window.MOMO_DEMO_UI.openAIItem(choice.id,result.needs,choice.options);
+    });
     if(b.hasAttribute('data-ai-edit-needs')&&result&&!pending)return handle(()=>{editorSnapshot=N.normalize(result.needs);D.editor(editorSnapshot);});
     if(b.hasAttribute('data-option-action'))return handle(()=>{
       const [index,kind]=b.dataset.optionAction.split(':');

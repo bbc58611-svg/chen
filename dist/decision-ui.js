@@ -80,6 +80,13 @@
     if(json.length>5700){value.paths=[];value.reply=value.reply.slice(0,250);value.offers=value.offers.map(({title,url})=>({title,url}));json=JSON.stringify(value);}
     return json;
   }
-  window.MOMO_DECISIONS={needbar,conversation,resources,paths,checklist,selectedItems,selectionText,draft,editor,readPatch,actionText,context};
+  function checkout(data,catalog){
+    if(!data||data.environment!=='sandbox')return '';
+    if(data.status!=='available')return `<section class="checkout-unavailable" role="status"><strong>No in-app checkout for these results</strong><p>${e(data.message)}</p>${data.reason==='free_only'?'':'<button class="subtle-btn" data-checkout-demo>Try a separate sandbox payment demo ↗</button>'}</section>`;
+    const picks=(data.items||[]).slice(0,3).map(choice=>({choice,item:catalog.find(item=>item.id===choice.id)})).filter(({choice,item})=>item&&Array.isArray(choice.options)&&choice.options.length);
+    if(!picks.length)return '';
+    return `<section class="checkout-decision" aria-label="Choose a payable sandbox option"><div class="checkout-heading"><span class="experience-badge">PAYPAL SANDBOX</span><h2>Choose one option. Review, then pay.</h2><p>Fictional test items and services. Sandbox funds only; no real booking or delivery.</p></div><div class="checkout-plan-grid">${picks.map(({item,choice})=>`<article class="checkout-plan"><span class="card-kicker">${e(item.kicker)}</span><h3>${e(item.name)}</h3><p>${e(item.desc)}</p><p class="checkout-plan-option">${e(choice.options[0])}${item.slot?' (UTC+8)':''}</p><div class="checkout-plan-total"><strong>$${Number(item.price).toFixed(2)} USD</strong><small>${e(item.unit)}</small></div><button class="primary-button" data-checkout-choice="${e(item.id)}">Review &amp; pay ↗</button></article>`).join('')}</div><p class="checkout-next-step">One choice opens the order review. Payment still needs your approval in PayPal.</p></section>`;
+  }
+  window.MOMO_DECISIONS={needbar,conversation,resources,paths,checklist,selectedItems,selectionText,draft,editor,readPatch,actionText,context,checkout};
 })();
 
