@@ -16,6 +16,8 @@ The prototype combines **DeepSeek Chat**, **DeepSeek Search**, and **PayPal Sand
 - Explore an animated companion that changes state while understanding, searching, and presenting options.
 - Use an explicitly fictional catalog to demonstrate a buyer-approved PayPal Sandbox checkout and a verified receipt.
 
+For supported language-learning and gift requests, up to three matching payable test options now appear directly after the AI reply. Choose **Review & pay** to open the item, total, and allowed test options. Web sources and extra planning steps stay available in an expandable section rather than creating another required selection loop. No special demo phrase is needed. Unsupported needs show that no matching in-app checkout is available; external resources are never converted into invented payable merchants.
+
 **Real search results and sandbox items are separate.** External results link to their original websites. They cannot be paid, booked, or fulfilled through Momo. Only the fictional catalog supports the integrated sandbox checkout. No real lessons, products, reservations, or deliveries are provided.
 
 ## Quick start
@@ -116,6 +118,7 @@ Tests use mocked providers and need no credentials. They incur no AI charges and
 | `backend/search.cjs`, `backend/evidence.cjs` | Search, source binding, and price evidence |
 | `backend/decision.cjs` | Editable needs and generated next steps |
 | `backend/paypal.cjs` | Sandbox orders, approval links, capture checks, and persistence |
+| `backend/checkout.cjs` | Matching payable test choices while preserving budget, currency, group size, and timing |
 | `backend/runtime.cjs` | Runtime configuration; local mode binds to loopback |
 | `test/` | Tests with synthetic data and mocked providers |
 | `docs/` | English setup, judge guide, project description, and screenshot |
