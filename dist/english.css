@@ -1,0 +1,16 @@
+/* English copy has different line lengths from the original interface. */
+html[lang=en] .hero h1{line-height:1.17;letter-spacing:-1.7px;max-width:560px}
+html[lang=en] .hero-copy>p{max-width:440px;font-size:13px;line-height:1.9;letter-spacing:0}
+html[lang=en] .hero-caption{max-width:410px;line-height:1.8}
+html[lang=en] .nav-item{font-size:12px;gap:10px}
+html[lang=en] .wish-example small{line-height:1.6}
+html[lang=en] .ai-mode-actions{flex-wrap:wrap}
+html[lang=en] .card-kicker{line-height:1.7}
+html[lang=en] .card-description{min-height:42px}
+html[lang=en] .availability{line-height:1.8}
+html[lang=en] .comparison-facts p{align-items:flex-start;line-height:1.8}
+html[lang=en] .checkout-options button{font-size:11px;line-height:1.7}
+html[lang=en] .receipt-status{white-space:normal;text-align:center;min-width:100px}
+html[lang=en] .need-bar-heading>span{font-size:11px}
+html[lang=en] .option-actions>.primary-button{white-space:normal;line-height:1.6}
+@media(max-width:680px){html[lang=en] .hero h1{font-size:36px;line-height:1.15}html[lang=en] .ai-connection{gap:12px}html[lang=en] .ai-mode-actions{gap:7px}html[lang=en] .receipt-card{align-items:flex-start}}

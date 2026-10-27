@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f7f2"><meta name="description" content="Turn a little wish into thoughtful possibilities with Momo. Discover products, services and a practical next step.">
+  <title>Momo · Your Little Wish Companion</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="feedback.css"><link rel="stylesheet" href="experience.css"><link rel="stylesheet" href="ux.css"><link rel="stylesheet" href="ai.css"><link rel="stylesheet" href="decision.css"><link rel="stylesheet" href="payments.css">
+<link rel="stylesheet" href="english.css"></head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="Momo home"><span class="brand-icon">m</span><span>momo<span class="brand-dot">.</span><small>Wish companion</small></span></a>
+    <button class="new-wish" id="newWish"><span>＋</span> Start a little wish <span>↗</span></button>
+    <div class="nav-label">YOUR EXPLORING SPACE</div>
+    <button class="nav-item active" id="exploreNav"><span>✧</span> Discover possibilities <span class="nav-arrow">↗</span></button>
+    <button class="nav-item" id="favoritesNav"><span>♡</span> Saved possibilities <b id="favoriteCount">0</b></button>
+    <button class="nav-item" id="ordersNav"><span>▧</span> Payment history <b id="orderCount">0</b></button>
+    <div class="nav-label examples-label">START WITH A LITTLE THOUGHT</div>
+    <button class="wish-example" data-start="english"><span class="mini-icon lavender">Aa</span><span>Feel braver speaking English<small>Find a language partner who fits</small></span></button>
+    <button class="wish-example" data-start="gift"><span class="mini-icon peach">✿</span><span>Reconnect with a friend<small>Find a thoughtful little gesture</small></span></button>
+    <button class="wish-example" data-start="chinese"><span class="mini-icon mint">Zh</span><span>Learn Chinese from scratch<small>Make the first step feel easier</small></span></button>
+    <div class="sidebar-bottom"><div class="little-note">Take your time.<br>Every little wish deserves a little care.<span>✳</span></div><div class="profile"><span class="profile-avatar">You</span><span>Today's explorer<small>Stay a little curious</small></span><span class="online-dot"></span></div></div>
+  </aside>
+  <main>
+    <header class="topbar"><span><span class="live-dot"></span> Your little wish companion</span><button id="aboutBtn" class="demo-badge">Interactive demo <span>ⓘ</span></button></header>
+    <section class="hero" id="hero">
+      <div class="hero-copy"><div class="eyebrow">A LITTLE WISH, A WORLD OF POSSIBILITIES</div><h1>One little wish,<br>a world of <span>possibilities.</span><svg class="title-spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 24 15 38 20 24 25 20 38 15 25 2 20 15 15Z"/></svg></h1><p>I'm Momo. Let's try one small step,<br>then find the right people, things and paths for you.</p><div class="hero-caption"><span class="avatar-dots">✦</span> You do not need all the answers. A little thought is enough.</div></div>
+      <div class="mascot-stage" id="mascotStage" data-state="idle">
+        <span class="stage-pill pill-one">Finding little good things <span>✧</span></span><span class="stage-pill pill-two">A path for your wish <span>↗</span></span>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="floating-star star-one">✦</span><span class="floating-star star-two">✧</span><span class="floating-flower">✳</span>
+        <svg class="mascot" viewBox="0 0 340 330" role="img" aria-label="Momo, a little round explorer with a backpack">
+          <defs><linearGradient id="bodyGradient" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#fff7de"/><stop offset="1" stop-color="#f0dcaf"/></linearGradient><linearGradient id="bagGradient" x2="1" y2="1"><stop stop-color="#f7ab78"/><stop offset="1" stop-color="#df8555"/></linearGradient></defs>
+          <ellipse class="mascot-shadow" cx="172" cy="289" rx="83" ry="12" fill="#326756" opacity=".12"/>
+          <g class="momo-body"><path d="M109 233 Q80 258 102 274 Q119 283 133 250" fill="#e4cfa2"/><path d="M211 245 Q218 281 242 272 Q258 262 234 235" fill="#e4cfa2"/><path d="M85 174 Q48 173 58 200 Q70 216 93 198" fill="#efddb5"/><path d="M247 172 Q284 155 285 181 Q281 204 251 204" fill="#efddb5"/>
+          <path d="M91 109 Q69 54 95 43 Q116 36 134 82" fill="#f1dfb9"/><path d="M204 80 Q224 35 247 48 Q267 66 241 116" fill="#f1dfb9"/><path d="M97 82 Q88 57 98 57 Q108 58 116 83" fill="#eab8a2"/><path d="M225 83 Q237 58 245 62 Q251 67 239 88" fill="#eab8a2"/>
+          <path d="M71 172 C70 102 115 73 172 74 C235 72 271 119 266 184 C263 247 222 267 164 264 C103 265 70 235 71 172Z" fill="url(#bodyGradient)" stroke="#decca8" stroke-width="1.5"/>
+          <path d="M104 97 Q149 69 202 90" fill="none" stroke="#fffdf0" stroke-width="9" stroke-linecap="round" opacity=".65"/>
+          <g class="momo-face"><g class="eyes"><ellipse cx="130" cy="160" rx="7" ry="10" fill="#334d43"/><ellipse cx="207" cy="160" rx="7" ry="10" fill="#334d43"/><circle cx="132" cy="156" r="2" fill="white"/><circle cx="209" cy="156" r="2" fill="white"/></g><ellipse cx="112" cy="180" rx="15" ry="8" fill="#eaa891" opacity=".65"/><ellipse cx="225" cy="180" rx="15" ry="8" fill="#eaa891" opacity=".65"/><path class="smile" d="M155 180 Q168 194 181 180" stroke="#4a5c49" stroke-width="4" fill="none" stroke-linecap="round"/></g>
+          <path d="M110 216 Q158 199 212 219 L203 253 Q160 270 117 249Z" fill="#58866a"/><path d="M122 213 Q140 185 176 197 L184 215" stroke="#d78251" stroke-width="8" fill="none"/><rect x="128" y="209" width="62" height="50" rx="16" fill="url(#bagGradient)"/><path d="M130 220 Q160 238 189 220" fill="none" stroke="#cf7749" stroke-width="2"/><circle cx="160" cy="231" r="4" fill="#fff4d7"/>
+          <g class="momo-hat"><path d="M105 103 Q111 55 163 60 Q202 63 214 105Z" fill="#6c9679"/><ellipse cx="159" cy="103" rx="68" ry="14" fill="#517d60"/><path d="M141 64 Q138 80 141 94" fill="none" stroke="#80aa8b" stroke-width="9"/><path d="M190 78 Q211 55 219 66 Q212 83 194 89" fill="#b5ca99"/></g>
+          <g class="momo-glass"><path d="m248 174 22 32" stroke="#755844" stroke-width="10" stroke-linecap="round"/><circle cx="239" cy="159" r="27" fill="#e5f4ee" fill-opacity=".65" stroke="#d99a63" stroke-width="8"/><path d="M225 151 Q232 140 243 143" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/></g>
+          <g class="momo-heart"><path d="M267 125 C239 109 245 88 259 91 C270 92 271 101 271 101 C278 81 300 90 295 105 Q288 119 267 125Z" fill="#e9a898"/></g>
+          </g></svg>
+        <div class="mascot-caption"><span class="live-dot"></span><span id="mascotCaption">Momo is waiting for your first little wish</span></div>
+      </div>
+    </section>
+    <section id="journey" class="journey" aria-live="polite"></section>
+    <section class="wish-box"><div class="wish-box-title"><span>✧</span> What would you like to make a little better today?</div><form id="wishForm"><label class="sr-only" for="wishInput">Tell Momo your wish</label><textarea id="wishInput" rows="2" placeholder="For example: I want to learn English, but I feel shy speaking…" maxlength="700"></textarea><div class="composer-bottom"><span id="composerHint">A little thought is enough to begin.</span><button class="send-btn" type="submit"><span>Let Momo explore</span><span>↗</span></button></div></form><div class="prompt-chips" id="promptChips"><button data-start="english">Aa <span>Find a friendly English tutor</span> ↗</button><button data-start="gift">✿ <span>A thoughtful gesture for a friend</span> ↗</button><button data-start="chinese">Zh <span>Learn Chinese from scratch</span> ↗</button></div></section>
+    <section id="initialNote" class="initial-note"><span>✳</span><div><strong>Sometimes the next step is a person. Sometimes it is a little care.</strong><p>Explore your needs first, then choose whether to buy or book. You decide.</p></div><span class="note-doodle">♡</span></section>
+    <footer><span>MADE FOR LITTLE WISHES</span><span>Fictional test catalog · Guided demo · No real charges</span><span>momo ✧</span></footer>
+  </main>
+  <dialog id="checkoutDialog" class="checkout-dialog"><button class="dialog-close" data-close="checkoutDialog" aria-label="Close">×</button><div id="checkoutContent"></div></dialog>
+  <dialog id="infoDialog" class="info-dialog"><button class="dialog-close" data-close="infoDialog" aria-label="Close">×</button><span class="eyebrow">HELLO, LITTLE EXPLORER</span><h2>Meet a little possibility.</h2><p>Momo is an interactive wish companion. Share a goal, refine your preferences, save options and try a sandbox checkout with an animated little explorer.</p><p>AI chat connects to DeepSeek and web search through the backend. The guided catalog uses fictional people, products, prices and time slots. Checkout uses PayPal Sandbox and does not create real bookings or deliveries.</p><button class="primary-button" data-close="infoDialog">Start exploring with Momo ↗</button></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="display.js"></script>
+  <script src="data.js"></script>
+  <script src="payments.js"></script>
+  <script src="experience.js"></script>
+  <script src="comparisons.js"></script>
+  <script src="app.js"></script>
+  <script src="needs.js"></script>
+  <script src="decision-ui.js"></script>
+  <script src="ai.js"></script>
+</body></html>
+

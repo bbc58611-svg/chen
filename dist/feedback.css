@@ -1,0 +1,39 @@
+/* Multi-round refinement panel. The original visual system is in style.css. */
+.feedback-box {
+  background: #eef2e7;
+  border: 1px solid #d7e0ca;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 17px 0 22px;
+}
+.feedback-heading { display:flex; align-items:center; gap:11px; }
+.feedback-momo { display:grid; place-items:center; width:34px; height:34px; border-radius:12px; background:#dde7cc; color:#688450; font-size:24px; flex-shrink:0; }
+.feedback-heading h3 { margin:0; color:#3b573b; font-size:13px; font-weight:600; }
+.feedback-heading p { margin:4px 0 0; color:#7c8d6e; font-size:10px; }
+.round-badge { margin-left:auto; white-space:nowrap; color:#7d906e; font-size:9px; padding:5px 9px; border:1px solid #d4dfc6; border-radius:20px; }
+.feedback-box form { padding:12px 0 0; }
+.feedback-box textarea { display:block; min-height:74px; background:#fffef9; border:1px solid #dfe5d7; border-radius:9px; padding:12px; font-size:12px; }
+.feedback-box textarea::placeholder { color:#9aa58f; }
+.feedback-box textarea:focus-visible { outline:2px solid #8aa674!important; outline-offset:2px; }
+.feedback-bottom { margin-top:11px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.feedback-bottom>span { font-size:10px; color:#8a987a; }
+.feedback-suggestions { display:flex; flex-wrap:wrap; gap:7px; margin-top:13px; }
+.feedback-suggestions button { padding:6px 9px; background:#f9fbf4; border:1px solid #dce5d1; border-radius:7px; color:#708760; font-size:10px; }
+.feedback-suggestions button:hover { background:#dfe9d3; }
+.remembered-preferences { display:flex; align-items:center; flex-wrap:wrap; gap:7px; margin-top:12px; }
+.remembered-preferences>span { font-size:10px; color:#859176; margin-right:3px; }
+.remembered-preferences b { font-size:10px; font-weight:500; padding:4px 9px; background:#e8eddf; color:#5e774a; border-radius:16px; }
+.continue-search { width:100%; padding:11px; margin-top:10px; border:1px solid #dce5d0; border-radius:9px; color:#66814e; font-size:11px; }
+.continue-search:hover { background:#edf2e5; }
+@media(max-width:680px) {
+  .feedback-box { padding:15px; }
+  .feedback-heading { align-items:flex-start; gap:8px; flex-wrap:wrap; }
+  .feedback-heading h3 { font-size:12px; }
+  .feedback-heading p { font-size:9px; max-width:215px; }
+  .feedback-momo { width:28px; height:28px; font-size:20px; }
+  .round-badge { margin-left:36px; font-size:8px; padding:3px 7px; }
+  .feedback-bottom { align-items:flex-start; flex-direction:column; gap:9px; }
+  .feedback-bottom .send-btn { align-self:flex-end; }
+  .feedback-bottom>span,.feedback-suggestions button { font-size:9px; }
+  .feedback-box textarea { font-size:11px; }
+}
